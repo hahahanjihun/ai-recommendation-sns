@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    # 💡 타임존과 SSL 설정 추가 가능
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/snsdb}
+    username: ${SPRING_DATASOURCE_USERNAME:snsuser}
+    password: ${SPRING_DATASOURCE_PASSWORD:snspassword}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
+        use_sql_comments: true
+        highlight_sql: true
+
+  sql:
+    init:
+      mode: never
+
+ai:
+  url: ${AI_URL:http://localhost:8000}  # Docker 없으면 기본 localhost
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace

@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  mysql:
+    image: mysql:8
+    container_name: sns-mysql
+    environment:
+      MYSQL_DATABASE: snsdb
+      MYSQL_USER: snsuser
+      MYSQL_PASSWORD: snspassword
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  spring-backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - ai-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/snsdb
+      SPRING_DATASOURCE_USERNAME: snsuser
+      SPRING_DATASOURCE_PASSWORD: snspassword
+      AI_URL: http://ai-service:8000
+
+  ai-service:
+    build: ./ai
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - spring-backend
+    environment:
+      VITE_API_URL: http://spring-backend:8080
+
+volumes:
+  mysql-data:

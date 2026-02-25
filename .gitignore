@@ -1,0 +1,21 @@
+# Node
+node_modules/
+dist/
+.env
+.env.local
+.vscode/
+.idea/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+sbert-model/
+
+# Spring
+/build/
+*.jar
+
+# OS
+.DS_Store
+Thumbs.db
