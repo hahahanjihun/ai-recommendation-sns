@@ -52,9 +52,13 @@ AI 모델을 통해 게시글을 추천해주는 SNS 플랫폼입니다.
 
 ## 🏗 프로젝트 구조
 sns-docker/
+
 ├── backend/ # Spring Boot
+
 ├── frontend/ # React (Vite)
+
 ├── ai/ # FastAPI recommendation server
+
 └── docker-compose.yml
 
 
